@@ -67,6 +67,21 @@ jobs:
           script: |
             # teste de acesso 
             echo "Acesso Liberado"
+            
+            #fazer o pull da imagem dockerhub
+            sudo docker pull helinho7/senai_api_ta:latest
+
+            #parar o app atual remover o container
+            sudo docker stop senai_api_ta 2>/dev/null || true 
+            sudo docker rm senai_api_ta 2>/dev/null || true 
+
+            # publicar novo container 
+            sudo docker run --name senai_api_ta -d -p 80:8080 helinho7/senai_api_ta:latest
+
+            # verificar se publicou 
+            sleep 5
+            curl -f http://localhost/health || exit 1
+            echo "Deploy feito com sucesso"
            
        
       
