@@ -47,6 +47,7 @@ jobs:
       - name: Configurar o Docker na VM
         uses: docker/build-push-action@v7.1.0
         with:
+          context: .
           push: true
           tags: |
               helinho7/senai_api_ta:latest
